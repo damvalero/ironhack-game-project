@@ -11,7 +11,7 @@ class Background {
     }
 
     draw(){
-        console.log('here is the background');
+        // console.log('here is the background');
         this.context.drawImage(this.backgroundImage,0,0, this.width, this.height);
     }
 

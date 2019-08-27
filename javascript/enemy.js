@@ -4,20 +4,20 @@ class Enemy {
         this.image = new Image();
         this.image.src= "./images/minion.png";
         this.context = game.context;
-        this.yLocation = 100;
+        this.width = this.game.canvas.width;
+        this.yLocation = 100;// y location of enemy ships from de canvas
         this.minionWidth = 75;
         this.minionHeight = 75;
-
-
 
     }
 
     draw (){
-        console.log("DEBUG canvas width", this.game.canvas.width);
-        for ( let xDistance = 0 ; xDistance<= 800  ; xDistance += 100){
+        // console.log("DEBUG canvas width", this.game.canvas.width);
+        for ( let xDistance = 0 ; xDistance<= this.width  ; xDistance += 90){
             this.context.drawImage(this.image, xDistance, this.yLocation, this.minionWidth, this.minionHeight);
-            // window.requestAnimationFrame (() => this.draw())
+            //console.log(xDistance);
         }
+        
 
     }
 
