@@ -8,7 +8,7 @@ class Enemy {
         this.yLocation = 100;// y location of enemy ships from de canvas
         this.minionWidth = 75;
         this.minionHeight = 75;
-        this.xDistance = x
+        this.xDistance = x;
 
     }
 

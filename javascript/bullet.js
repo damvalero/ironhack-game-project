@@ -2,7 +2,7 @@ class Bullet {
     constructor (game){
         this.game = game;
         this.image = new Image();
-        this.image.src= './images/shoot-player.png';
+        this.image.src= './images/Livello-10.png';
         this.canvas = this.game.canvas;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
@@ -13,7 +13,7 @@ class Bullet {
         this.player = this.game.player
         this.xBullet= this.player.x  + this.player.playerWidth/2 - this.bulletWidth/2;
         this.yBullet = this.height - this.player.playerHeight;
-        this.speed = 20;
+        this.speed = 11;
         //this.bar = 
     }
 

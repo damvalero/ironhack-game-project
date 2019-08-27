@@ -3,8 +3,16 @@ class Game {
         this.canvas = canvas;
         this.context = this.canvas.getContext('2d');
         this.background = new Background (this);
-        this.enemy = new Enemy (this,400);
-        this.enemy2 = new Enemy (this,450);
+        this.enemy = new Enemy (this,0);
+        this.enemy2 = new Enemy (this,90);
+        this.enemy3 = new Enemy (this,180);
+        this.enemy4 = new Enemy (this,270);
+        this.enemy5 = new Enemy (this,360);
+        this.enemy6 = new Enemy (this,450);
+        this.enemy7 = new Enemy (this,540);
+        this.enemy8 = new Enemy (this,630);
+        this.enemy9 = new Enemy (this,720);
+        this.enemy10 = new Enemy (this,810);
 
         this.player = new Player(this);
         this.bullet = new Bullet (this);
@@ -48,6 +56,13 @@ class Game {
         this.background.draw();
         this.enemy.draw();
         this.enemy2.draw();
+        this.enemy3.draw();
+        this.enemy4.draw();
+        this.enemy5.draw();
+        this.enemy6.draw();
+        this.enemy7.draw();
+        this.enemy8.draw();
+        this.enemy9.draw();
 
         this.player.draw();
               // TO DO  - loop to update array of bullets
