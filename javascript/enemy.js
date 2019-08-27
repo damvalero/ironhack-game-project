@@ -1,5 +1,5 @@
 class Enemy {
-    constructor (game){
+    constructor (game,x){
         this.game = game;
         this.image = new Image();
         this.image.src= "./images/minion.png";
@@ -8,15 +8,20 @@ class Enemy {
         this.yLocation = 100;// y location of enemy ships from de canvas
         this.minionWidth = 75;
         this.minionHeight = 75;
+        this.xDistance = x
 
+    }
+
+    shoot(){
+        
     }
 
     draw (){
         // console.log("DEBUG canvas width", this.game.canvas.width);
-        for ( let xDistance = 0 ; xDistance<= this.width  ; xDistance += 90){
-            this.context.drawImage(this.image, xDistance, this.yLocation, this.minionWidth, this.minionHeight);
+        //for ( let xDistance = 0 ; xDistance<= this.width  ; xDistance += 90){
+            this.context.drawImage(this.image, this.xDistance, this.yLocation, this.minionWidth, this.minionHeight);
             //console.log(xDistance);
-        }
+       // }
         
 
     }
