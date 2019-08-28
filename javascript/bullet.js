@@ -26,7 +26,7 @@ class Bullet {
         //console.log('texting shoots');
         this.game.bulletsArray.map(pos => {
             this.context.drawImage(this.image,pos.x,pos.y, this.bulletWidth,this.bulletHeigth);
-            this.context.fillStyle = "red";     
+            //this.context.fillStyle = "red";     
         })
         //this.context.fillRect(this.xBullet,this.yBullet, this.bulletWidth,this.bulletHeigth)
     }
