@@ -54,7 +54,12 @@ class Game {
            this.timer = timestamp
            console.log(this.bulletsArrayMinion);
           }
-  
+//------- DELETE USELESS BULLETS FROM ARRAY ----------
+
+          if ( this.bulletsArrayMinion.length > 20){
+            this.bulletsArrayMinion.shift();
+          }
+          //to do erase player bullets.
       }
 
     clear () {
