@@ -87,10 +87,19 @@ class Game {
         bullet.yBullet < this.player.y + this.player.playerHeight
       ){
         //this.player.explosion();
+        this.player.explosion();
         console.log('GAAAAAAAAAAAAAAAAAAAAAAAAAAAAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE OOOOOOOOOOOOVVEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRr');
+        //this.gameover();
       }
     }
   }
+
+  
+
+
+  gameover(){
+    window.alert('GAMER OVER');
+}
 
   clear() {
     const width = this.canvas.width;

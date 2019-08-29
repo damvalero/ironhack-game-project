@@ -14,7 +14,12 @@ class Player {
         this.moveRight = false; //move right false
         this.keyBar = false;
         this.speed = 10;
-        //space flase not for now
+        this.explosionFrameCounter = 0;
+
+        this.image1 = new Image();
+        this.image1.src = "./images/explosion-player.png";
+        this.explosionWidth= this.playerWidth;
+        this.explosionHeight = this.playerHeight;
         this.registerEventListeners();
     }
 
@@ -82,6 +87,7 @@ class Player {
     }
 
     explosion() {
+        this.explosionFrameCounter = 1;
     }
 
 
@@ -89,6 +95,10 @@ class Player {
         // console.log ('aparece nave');
         this.context.drawImage(this.image, this.x, this.y, this.playerWidth, this.playerHeight);
         // window.requestAnimationFrame(() => this.draw());
+        if (this.explosionFrameCounter > 0) {
+            this.explosionFrameCounter += 1;
+            this.context.drawImage(this.image1,this.x, this.y, this.explosionWidth, this.explosionHeight);
+        }
     }
 
     update() {
