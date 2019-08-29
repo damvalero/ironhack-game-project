@@ -36,7 +36,7 @@ class Game {
 
   runLogic(timestamp) {
     //-----UPDATING ALL VALUES --------
-    this.player.move();
+    //this.player.move();
     this.player.update();
     this.bullet.update();
     this.bulletMinion.update();
@@ -77,15 +77,17 @@ class Game {
         }
       }
     }
+    
 //------player colition
     for (let bullet of this.bulletsArrayMinion){
       if (
         bullet.xBullet > this.player.x &&
         bullet.xBullet < this.player.x + this.player.playerWidth &&
-        bullet.yBullet < this.player.y &&
-        bullet.yBullet > this.player.y + this.player.playerHeight
+        bullet.yBullet > this.player.y &&
+        bullet.yBullet < this.player.y + this.player.playerHeight
       ){
-        console.log('game over');
+        //this.player.explosion();
+        console.log('GAAAAAAAAAAAAAAAAAAAAAAAAAAAAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE OOOOOOOOOOOOVVEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRr');
       }
     }
   }

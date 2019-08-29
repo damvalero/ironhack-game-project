@@ -81,7 +81,7 @@ class Player {
         //console.log('is shooting',game.bullet);
     }
 
-    move() {
+    explosion() {
     }
 
 
