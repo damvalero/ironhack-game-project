@@ -12,9 +12,6 @@ class Boss {
         this.y = 10;
     }
 
-
-
-
     draw(){
         this.context.drawImage(this.image,this.x, this.y, this.bossWidth, this.bossHeight);
     }

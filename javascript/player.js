@@ -9,10 +9,11 @@ class Player {
         this.playerWidth = 100; // x dimension of photo player
         this.playerHeight = 100; // y dimension of photo player
         this.x = this.width / 2 - this.playerWidth / 2;
+        this.y = this.height - this.playerHeight;
         this.moveLeft = false; //move left flase
         this.moveRight = false; //move right false
         this.keyBar = false;
-        this.speed = 20;
+        this.speed = 10;
         //space flase not for now
         this.registerEventListeners();
     }
@@ -30,6 +31,7 @@ class Player {
         window.addEventListener('keydown', event => {
             const key = event.keyCode;
             if ([39, 37, 32].includes(key)) {
+                event.preventDefault();
                 switch (key) {
                     case 39:
                         this.moveRight = true;
@@ -85,7 +87,7 @@ class Player {
 
     draw() {
         // console.log ('aparece nave');
-        this.context.drawImage(this.image, this.x, this.height - this.playerHeight, this.playerWidth, this.playerHeight);
+        this.context.drawImage(this.image, this.x, this.y, this.playerWidth, this.playerHeight);
         // window.requestAnimationFrame(() => this.draw());
     }
 
@@ -93,11 +95,11 @@ class Player {
         //--------conditions to move the player
         if (this.moveLeft === true && !((this.x + this.playerWidth/2) <= 50)) {
             this.x -= this.speed;
-            console.log(this.x);
+            //console.log(this.x);
         }; // if the !part is true then is not possible to move
         if (this.moveRight && !((this.x + this.playerWidth/2) >= this.width-50)) {
             this.x += this.speed;
-            console.log(this.x);
+            //console.log(this.x);
         };
         
     }

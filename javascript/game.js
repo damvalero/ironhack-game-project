@@ -1,118 +1,115 @@
 class Game {
-    constructor (canvas){
-        this.canvas = canvas;
-        this.context = this.canvas.getContext('2d');
-        this.background = new Background (this);
-        this.enemy = new Enemy (this,0);
-        this.enemy2 = new Enemy (this,90);
-        this.enemy3 = new Enemy (this,180);
-        this.enemy4 = new Enemy (this,270);
-        this.enemy5 = new Enemy (this,360);
-        this.enemy6 = new Enemy (this,450);
-        this.enemy7 = new Enemy (this,540);
-        this.enemy8 = new Enemy (this,630);
-        this.enemy9 = new Enemy (this,720);
-        this.bulletMinion = new Bulletminion (this);
-
-        //this.boos = new Boss (this);
-
-        this.player = new Player(this);
-        this.bullet = new Bullet (this);
-        this.FREQUENCY= 500
-        this.timer = 0;
-        //console.log(this.player);
-        //console.log(this.bullet);
-        this.bulletsArray = [];
-        this.bulletsArrayMinion= [];
-        //this.bulletsArray.push(new Bullet(this))
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.context = this.canvas.getContext('2d');
+    this.background = new Background(this);
+    this.enemies = [];
+    for (let i = 0; i < 9; i++) {
+      this.enemies.push(new Enemy(this, i * 90))
     }
-    
-    start () {
-        // this.reset();
-        this.loop(0);
-      }
+    this.bulletMinion = new Bulletminion(this);
 
-      loop (timestamp) {
-        this.runLogic(timestamp);
-        this.draw();
-        // this.timer = timestamp;
-        window.requestAnimationFrame((timestamp) => this.loop(timestamp));
-      }
+    //this.boos = new Boss (this);
 
-      runLogic(timestamp){
-//-----UPDATING ALL VALUES --------
-          this.player.move();
-          this.player.update();
-          this.bullet.update();
-          this.bulletMinion.update();
-          this.bulletsArrayMinion.map(elementBullet=>{
-            elementBullet.update()
-          })
-          this.colition();
-
-//----- PUSHING MINION BULLETS TO ARRAY------
-          if (this.timer < timestamp - this.FREQUENCY){
-            this.bulletsArrayMinion.push(new Bulletminion(this))
-           this.timer = timestamp
-          // console.log(this.bulletsArrayMinion);
-          }
-//------- DELETE USELESS BULLETS FROM ARRAY ----------
-
-          if ( this.bulletsArrayMinion.length > 20){
-            this.bulletsArrayMinion.shift();
-          }
-          //to do erase player bullets.
-      }
-
-      
-    
-    colition(){
-      for(let item in this.bulletsArray){
-        if (item.yBullet <= (this.enemy.yLocation + this.enemy.minionHeight)  && item.xBullet <= this.enemy.minionWidth){
-        console.log('you hit minion enemy');
-        // if (this.bulletsArray[item].yBullet <= (this.enemy.yLocation + this.enemy.minionHeight)  && this.bulletsArray[item].xBullet <= this.enemy.minionWidth){
-        //   console.log('you hit minion enemy');  
-      }
-      }
-      //console.log('WIDTHy', this.enemy.minionWidth);
-      //console.log('bullet x', this.bullet.xBullet);
-
-      // for (let shipArea = 0; shipArea <= this.canvas.width; shipArea += 90){
-      //   if (shipArea){
-      //     console.log('you hit enemy');
-
-      //   }
-      // }
-    }
-
-
-    clear () {
-        const width = this.canvas.width;
-        const height = this.canvas.height;
-        this.context.clearRect(0, 0, width, height);
-      }
-
-    draw(){
-        this.clear();
-        this.background.draw();
-        this.enemy.draw();
-        this.enemy2.draw();
-        this.enemy3.draw();
-        this.enemy4.draw();
-        this.enemy5.draw();
-        this.enemy6.draw();
-        this.enemy7.draw();
-        this.enemy8.draw();
-        this.enemy9.draw();
-
-        this.bulletMinion.draw();
-        this.bulletsArrayMinion.map(elementBullet =>elementBullet.draw());
-        //this.boss.draw();
-        this.player.draw();
-              // TO DO  - loop to update array of bullets
-        this.bullet.draw();
-        // console.log('everything is here');
-
-    }
-    
+    this.player = new Player(this);
+    this.bullet = new Bullet(this);
+    this.FREQUENCY = 200
+    this.timer = 0;
+    //console.log(this.player);
+    //console.log(this.bullet);
+    this.bulletsArray = [];
+    this.bulletsArrayMinion = [];
+    //this.bulletsArray.push(new Bullet(this))
   }
+
+  start() {
+    // this.reset();
+    this.loop(0);
+  }
+
+  loop(timestamp) {
+    this.runLogic(timestamp);
+    this.draw();
+    // this.timer = timestamp;
+    window.requestAnimationFrame((timestamp) => this.loop(timestamp));
+  }
+
+  runLogic(timestamp) {
+    //-----UPDATING ALL VALUES --------
+    this.player.move();
+    this.player.update();
+    this.bullet.update();
+    this.bulletMinion.update();
+    // this.bulletsArrayMinion.map(elementBullet => {
+    //   elementBullet.update()
+    // })
+    for (let elementBullet of this.bulletsArrayMinion) {
+      elementBullet.update()
+    }
+    this.colition();
+
+    //----- PUSHING MINION BULLETS TO ARRAY------
+    if (this.enemies.length && this.timer < timestamp - this.FREQUENCY) {
+      this.bulletsArrayMinion.push(new Bulletminion(this))
+      this.timer = timestamp
+      // console.log(this.bulletsArrayMinion);
+    }
+    //------- DELETE USELESS BULLETS FROM ARRAY ----------
+
+    if (this.bulletsArrayMinion.length > 20) {
+      this.bulletsArrayMinion.shift();
+    }
+    //to do erase player bullets.
+  }
+
+  colition() {
+    //-------enemy colition
+    for (let bullet of this.bulletsArray) {
+      for (let enemy of this.enemies) {
+        if (
+          bullet.x > enemy.x &&
+          bullet.x < enemy.x + enemy.width &&
+          bullet.y > enemy.y &&
+          bullet.y < enemy.y + enemy.height
+        ) {
+          enemy.explosion();
+          console.log('100 ptos')
+        }
+      }
+    }
+//------player colition
+    for (let bullet of this.bulletsArrayMinion){
+      if (
+        bullet.xBullet > this.player.x &&
+        bullet.xBullet < this.player.x + this.player.playerWidth &&
+        bullet.yBullet < this.player.y &&
+        bullet.yBullet > this.player.y + this.player.playerHeight
+      ){
+        console.log('game over');
+      }
+    }
+  }
+
+  clear() {
+    const width = this.canvas.width;
+    const height = this.canvas.height;
+    this.context.clearRect(0, 0, width, height);
+  }
+
+  draw() {
+    this.clear();
+    this.background.draw();
+    for (let enemy of this.enemies) {
+      enemy.draw();
+    }
+    this.bulletMinion.draw();
+    this.bulletsArrayMinion.map(elementBullet => elementBullet.draw());
+    //this.boss.draw();
+    this.player.draw();
+    // TO DO  - loop to update array of bullets
+    this.bullet.draw();
+    // console.log('everything is here');
+
+  }
+
+}
