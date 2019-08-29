@@ -35,7 +35,7 @@ class Player {
 
         window.addEventListener('keydown', event => {
             const key = event.keyCode;
-            if ([39, 37, 32].includes(key)) {
+            if ([39, 37, 32,13].includes(key)) {
                 event.preventDefault();
                 switch (key) {
                     case 39:
@@ -44,6 +44,12 @@ class Player {
                         break;
                     case 37:
                         this.moveLeft = true;
+                        //this.x -=25;
+                        //console.log('is pressed left');
+                        break;
+                
+                    case 13:
+                        this.game.gameStatus = "play"
                         //this.x -=25;
                         //console.log('is pressed left');
                         break;

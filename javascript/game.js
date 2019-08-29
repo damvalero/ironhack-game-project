@@ -15,11 +15,18 @@ class Game {
     this.bullet = new Bullet(this);
     this.FREQUENCY = 200
     this.timer = 0;
+    this.gameStatus = "play"
     //console.log(this.player);
     //console.log(this.bullet);
     this.bulletsArray = [];
     this.bulletsArrayMinion = [];
     //this.bulletsArray.push(new Bullet(this))
+
+    this.image= new Image();
+    this.image.src="./images/gameover.jpg";
+    this.imageW = 300;
+    this.imageH = 200;
+    this.counter = 0;
   }
 
   start() {
@@ -27,9 +34,20 @@ class Game {
     this.loop(0);
   }
 
+  reset(){
+
+  }
+
+
   loop(timestamp) {
+    if(this.gameStatus === "play"){
     this.runLogic(timestamp);
     this.draw();
+  }
+  else if(this.gameStatus === "winner"){
+    this.drawWinningScreen()
+  }
+  //console.log("whats the stauts ---", this.gameStatus)
     // this.timer = timestamp;
     window.requestAnimationFrame((timestamp) => this.loop(timestamp));
   }
@@ -37,6 +55,7 @@ class Game {
   runLogic(timestamp) {
     //-----UPDATING ALL VALUES --------
     //this.player.move();
+  
     this.player.update();
     this.bullet.update();
     this.bulletMinion.update();
@@ -47,6 +66,7 @@ class Game {
       elementBullet.update()
     }
     this.colition();
+    this.youWIn();
 
     //----- PUSHING MINION BULLETS TO ARRAY------
     if (this.enemies.length && this.timer < timestamp - this.FREQUENCY) {
@@ -73,7 +93,6 @@ class Game {
           bullet.y < enemy.y + enemy.height
         ) {
           enemy.explosion();
-          console.log('100 ptos')
         }
       }
     }
@@ -88,17 +107,29 @@ class Game {
       ){
         //this.player.explosion();
         this.player.explosion();
-        console.log('GAAAAAAAAAAAAAAAAAAAAAAAAAAAAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE OOOOOOOOOOOOVVEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRr');
-        //this.gameover();
+        //console.log('GAAAAAAAAAAAAAAAAAAAAAAAAAAAAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE OOOOOOOOOOOOVVEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRr');
+        this.gameover();
       }
     }
   }
 
-  
+  youWIn(){
+    if (this.counter === 63){
+      //window.alert('you win!!');
+      this.gameStatus = "winner"
+    }
+  }
+
+  drawWinningScreen() {
+    //console.log("TEEEEST")
+    this.context.fillStyle = "red"
+    this.context.fillRect(0,0,this.canvas.width, this.canvas.height)
+  }  
 
 
   gameover(){
-    window.alert('GAMER OVER');
+    //this.context.drawImage(this.image,200, 250, this.imageW, this.imageH);
+    //window.alert('GAMER OVER');
 }
 
   clear() {

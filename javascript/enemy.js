@@ -23,6 +23,8 @@ class Enemy {
 
     explosion() {
         this.explosionFrameCounter = 1;
+        this.game.counter +=1;
+        //console.log('is counting'+ this.game.counter);
     }
     
     remove () {
