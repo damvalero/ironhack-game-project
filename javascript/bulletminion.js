@@ -19,7 +19,7 @@ class Bulletminion {
 
     //-------different solution from player's bullet -------
     draw() {
-        console.log(this.xBullet)
+       // console.log(this.xBullet)
         this.context.drawImage(this.image, this.xBullet, this.yBullet, this.bulletWidth, this.bulletHeigth);
     }
 

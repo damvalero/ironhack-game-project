@@ -8,7 +8,7 @@ class Player {
         this.height = this.game.canvas.height; // where is going to be located in y
         this.playerWidth = 100; // x dimension of photo player
         this.playerHeight = 100; // y dimension of photo player
-        this.x = this.width / 2 - this.playerWidth / 2
+        this.x = this.width / 2 - this.playerWidth / 2;
         this.moveLeft = false; //move left flase
         this.moveRight = false; //move right false
         this.keyBar = false;
@@ -90,12 +90,15 @@ class Player {
     }
 
     update() {
-        //if checkin with both if is left and right
-        if (this.moveLeft === true) {
-            this.x -= this.speed
-        }; //move left flase
-        if (this.moveRight) {
-            this.x += this.speed
+        //--------conditions to move the player
+        if (this.moveLeft === true && !((this.x + this.playerWidth/2) <= 50)) {
+            this.x -= this.speed;
+            console.log(this.x);
+        }; // if the !part is true then is not possible to move
+        if (this.moveRight && !((this.x + this.playerWidth/2) >= this.width-50)) {
+            this.x += this.speed;
+            console.log(this.x);
         };
+        
     }
 }

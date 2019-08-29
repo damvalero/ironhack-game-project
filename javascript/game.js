@@ -14,7 +14,7 @@ class Game {
         this.enemy9 = new Enemy (this,720);
         this.bulletMinion = new Bulletminion (this);
 
-        this.boos = new Boss (this);
+        //this.boos = new Boss (this);
 
         this.player = new Player(this);
         this.bullet = new Bullet (this);
@@ -26,6 +26,7 @@ class Game {
         this.bulletsArrayMinion= [];
         //this.bulletsArray.push(new Bullet(this))
     }
+    
     start () {
         // this.reset();
         this.loop(0);
@@ -47,12 +48,13 @@ class Game {
           this.bulletsArrayMinion.map(elementBullet=>{
             elementBullet.update()
           })
+          this.colition();
 
 //----- PUSHING MINION BULLETS TO ARRAY------
           if (this.timer < timestamp - this.FREQUENCY){
             this.bulletsArrayMinion.push(new Bulletminion(this))
            this.timer = timestamp
-           console.log(this.bulletsArrayMinion);
+          // console.log(this.bulletsArrayMinion);
           }
 //------- DELETE USELESS BULLETS FROM ARRAY ----------
 
@@ -61,6 +63,28 @@ class Game {
           }
           //to do erase player bullets.
       }
+
+      
+    
+    colition(){
+      for(let item in this.bulletsArray){
+        if (item.yBullet <= (this.enemy.yLocation + this.enemy.minionHeight)  && item.xBullet <= this.enemy.minionWidth){
+        console.log('you hit minion enemy');
+        // if (this.bulletsArray[item].yBullet <= (this.enemy.yLocation + this.enemy.minionHeight)  && this.bulletsArray[item].xBullet <= this.enemy.minionWidth){
+        //   console.log('you hit minion enemy');  
+      }
+      }
+      //console.log('WIDTHy', this.enemy.minionWidth);
+      //console.log('bullet x', this.bullet.xBullet);
+
+      // for (let shipArea = 0; shipArea <= this.canvas.width; shipArea += 90){
+      //   if (shipArea){
+      //     console.log('you hit enemy');
+
+      //   }
+      // }
+    }
+
 
     clear () {
         const width = this.canvas.width;
