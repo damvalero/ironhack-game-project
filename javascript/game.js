@@ -30,16 +30,54 @@ class Game {
   }
 
   start() {
-    // this.reset();
     this.loop(0);
   }
 
+  registerEventListeners(){
+    window.addEventListener('keydown', event => {
+      const key = event.keyCode;
+      if ([13].includes(key)) {
+          event.preventDefault();
+          switch (key) {
+              case 13:
+                  this.gameStatus = "play";
+                  this.reset();
+                  break;
+          }
+      }
+  });
+
+
+  }
+
   reset(){
+    this.clear();
+    //this.player = new Player(this);
+    this.player.explosionFrameCounter=0
+    this.enemies = [];
+    this.bulletsArray = [];
+    this.bulletsArrayMinion = [];
+    this.timer = 0;
+    for (let i = 0; i < 9; i++) {
+      this.enemies.push(new Enemy(this, i * 90))
+    }
+    this.bulletMinion = new Bulletminion(this);
+    this.bullet = new Bullet(this);
+    //console.log(this.player);
+    //console.log(this.bullet);
+    //this.bulletsArray.push(new Bullet(this))
+    
+    // this.image= new Image();
+    // this.image.src="./images/gameover.jpg";
+    // this.imageW = 300;
+    // this.imageH = 200;
+    this.counter = 0;
 
   }
 
 
   loop(timestamp) {
+    this.registerEventListeners();  
     if(this.gameStatus === "play"){
     this.runLogic(timestamp);
     this.draw();
@@ -59,6 +97,7 @@ class Game {
     this.player.update();
     this.bullet.update();
     this.bulletMinion.update();
+    this.background.update()
     // this.bulletsArrayMinion.map(elementBullet => {
     //   elementBullet.update()
     // })
@@ -146,6 +185,8 @@ class Game {
     }
     this.bulletMinion.draw();
     this.bulletsArrayMinion.map(elementBullet => elementBullet.draw());
+    //this.bulletsArray.map(bullet => bullet.draw());
+
     //this.boss.draw();
     this.player.draw();
     // TO DO  - loop to update array of bullets

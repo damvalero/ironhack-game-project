@@ -80,16 +80,16 @@ class Player {
     }
     shoot() {
         //console.log("DEBUG x",this.game.player.x)
-        let game = this.game
+        //let game = this.game
         let x= this.x  + this.playerWidth/2
         let y= this.height - this.playerHeight
 
         //debugger;
         this.keyBar = true;
-        game.bulletsArray.push({x,y})
-        console.log(game.bulletsArray)
-        game.bullet.draw()
-        //console.log('is shooting',game.bullet);
+        this.game.bulletsArray.push({x,y})
+        console.log(this.keyBar)
+        console.log(this.game.bulletsArray)
+        console.log('is shooting',game.bullet);
     }
 
     explosion() {
