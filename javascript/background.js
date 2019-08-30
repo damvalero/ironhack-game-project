@@ -23,6 +23,6 @@ class Background {
         this.y += this.velocityY
         if(this.y >= this.height)
             this.y =0
-        console.log(this.y)
+        //console.log(this.y)
     }
 }

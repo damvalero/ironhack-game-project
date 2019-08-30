@@ -18,78 +18,48 @@ class Player {
 
         this.image1 = new Image();
         this.image1.src = "./images/explosion-player.png";
-        this.explosionWidth= this.playerWidth;
+        this.explosionWidth = this.playerWidth;
         this.explosionHeight = this.playerHeight;
-        this.registerEventListeners();
     }
 
-    registerEventListeners() {
-
-        window.addEventListener('keydown', event => {
-            const key = event.keyCode;
-
-            if ([32].includes(key)) {
+    handleControl (control) {
+        switch (control) {
+            case "space":
                 this.shoot();
-            }
-        });
-
-        window.addEventListener('keydown', event => {
-            const key = event.keyCode;
-            if ([39, 37, 32,13].includes(key)) {
-                event.preventDefault();
-                switch (key) {
-                    case 39:
-                        this.moveRight = true;
-                        //console.log('is press right');
-                        break;
-                    case 37:
-                        this.moveLeft = true;
-                        //this.x -=25;
-                        //console.log('is pressed left');
-                        break;
-                
-                    case 13:
-                        this.game.gameStatus = "play"
-                        //this.x -=25;
-                        //console.log('is pressed left');
-                        break;
-                }
-            }
-        });
-
-        window.addEventListener('keyup', event => {
-            const keyU = event.keyCode;
-            if ([39, 37, 32].includes(keyU)) {
-                switch (keyU) {
-                    case 39:
-                        this.moveRight = false;
-                        // console.log('it stops to press right');
-                        break;
-                    case 37:
-                        this.moveLeft = false;
-                        // console.log ('it stop to press left');
-                        break;
-                    case 32:
-                        this.keyBar = false;
-                        //console.log('it stop to shoot');
-                        break;
-
-                }
-            }
-        });
+                break;
+            case 'right':
+                this.moveRight = true;
+                break;
+            case 'left':
+                this.moveLeft = true;
+                break;
+            case 'rightKeyUp':
+                this.moveRight = false;
+                break;
+            case 'leftKeyUp':
+                this.moveLeft = false;
+                break;
+            case 'enter':
+                this.game.gameStatus = "play"
+                break;
+        }
     }
+
     shoot() {
         //console.log("DEBUG x",this.game.player.x)
         //let game = this.game
-        let x= this.x  + this.playerWidth/2
-        let y= this.height - this.playerHeight
+        let x = this.x + this.playerWidth / 2
+        let y = this.height - this.playerHeight
 
         //debugger;
         this.keyBar = true;
-        this.game.bulletsArray.push({x,y})
+        this.game.bulletsArray.push({
+            x,
+            y
+        })
         console.log(this.keyBar)
         console.log(this.game.bulletsArray)
-        console.log('is shooting',game.bullet);
+        console.log('is shooting', game.bullet);
     }
 
     explosion() {
@@ -103,20 +73,20 @@ class Player {
         // window.requestAnimationFrame(() => this.draw());
         if (this.explosionFrameCounter > 0) {
             this.explosionFrameCounter += 1;
-            this.context.drawImage(this.image1,this.x, this.y, this.explosionWidth, this.explosionHeight);
+            this.context.drawImage(this.image1, this.x, this.y, this.explosionWidth, this.explosionHeight);
         }
     }
 
     update() {
         //--------conditions to move the player
-        if (this.moveLeft === true && !((this.x + this.playerWidth/2) <= 50)) {
+        if (this.moveLeft === true && !((this.x + this.playerWidth / 2) <= 50)) {
             this.x -= this.speed;
             //console.log(this.x);
         }; // if the !part is true then is not possible to move
-        if (this.moveRight && !((this.x + this.playerWidth/2) >= this.width-50)) {
+        if (this.moveRight && !((this.x + this.playerWidth / 2) >= this.width - 50)) {
             this.x += this.speed;
             //console.log(this.x);
         };
-        
+
     }
 }
