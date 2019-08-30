@@ -8,6 +8,7 @@ class Game {
     this.image.src = "./images/Publication1.png";
     this.image1 = new Image();
     this.image1.src = "./images/gameover.png";
+    this.gameStatus = "play";
     this.setKeyBindings();
     this.reset();
   }
@@ -86,11 +87,10 @@ class Game {
       window.requestAnimationFrame((timestamp) => this.loop(timestamp));
     } else if (this.gameStatus === "winner") {
       this.drawWinningScreen()
-    } else if (this.gameStatus === "game over")
-      this.drawinGameOverScreen();
-    //console.log("whats the stauts ---", this.gameStatus)
-    // this.timer = timestamp;
-
+    } else if (this.gameStatus === "game over") {
+      this.drawinGameOverScreen()
+    } 
+  
   }
 
   runLogic(timestamp) {
