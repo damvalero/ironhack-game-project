@@ -11,7 +11,7 @@ class Enemy {
         this.canvasWidth = this.game.canvas.width;
         this.image = enemyImage;
         
-        this.y = 100;// y location of enemy ships from de canvas
+        this.y = 20;// y location of enemy ships from de canvas
         this.x = x;
         this.width = 75;
         this.height = 75;

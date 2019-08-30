@@ -1,3 +1,34 @@
+body{
+    background: #1D64A9;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.logo{
+    padding-top: 20px;
+}
 canvas{
     background: black;
 }
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-canvas{
+    display: flex;
+    align-items: center;
+}
+body button {
+    font-size: 30px;
+    background-color:	#D61514;
+    color: black;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
